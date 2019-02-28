@@ -1,1 +1,80 @@
 $myGrey: #DADFEA;
+$myDarkGrey: #AFB5BC;
+//$myCream: #F7F7F7;
+$myCream: #4F6D7A;
+$quicksand: 'Quicksand', sans-serif;
+
+@mixin centerDisplay() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body, html {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  font-size: 25px;
+  font-family: $quicksand;
+  background-color: #F7F7F7;
+}
+
+input {
+  border: none;
+  outline: none;
+}
+
+.pageWrapper {
+  height: inherit;
+  @include centerDisplay();
+  flex-direction: column;
+  .top {
+    width: 100%;
+    @include centerDisplay();
+    height: 100px;
+  }
+  .mainNav {
+    @include centerDisplay();
+    //justify-content: space-between;
+    background-color: $myCream;
+    height: 100%;
+    width: 100%;
+    img {
+      height: 50px;
+    }
+  }
+  .pageContent {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 80%;
+    padding-top: 50px;
+    .leftOfPage {
+      height: 85%;
+      width: 300px;
+      background-color: $myDarkGrey;
+      margin-right: 25px;
+      .nav {
+        .info {
+          padding-top: 20px;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          img {
+            height: 175px;
+          }
+        }
+        .links {
+          padding-top: 20px;
+          width: 100%;
+          @include centerDisplay();
+          flex-direction: column;
+          a {
+            color: $myGrey;
+          }
+        }
+      }
+    }
+  }
+}
