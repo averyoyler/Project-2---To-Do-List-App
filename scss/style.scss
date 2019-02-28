@@ -98,3 +98,86 @@ input {
     }
   }
 }
+
+.bottom {
+  @include centerDisplay();
+  .addListButton {
+    position: fixed;
+    bottom: 20px;
+    font-size: 50px;
+  }
+  img {
+    height: 75px;
+  }
+}
+
+.bottomNav {
+  @include centerDisplay();
+  flex-direction: column;
+  height: 0;
+  width: 80%;
+  position: fixed;
+  bottom: -100px;
+  transition: 0.7s;
+  z-index: 1;
+  background-color: $myGrey;
+  box-shadow: 7px 5px 10px 0 $myDarkGrey;
+  .closeButton {
+    @include centerDisplay();
+    box-sizing: border-box;
+    color: #FFFFFF;
+    font-size: 75px;
+  }
+  .bottomNavContent {
+    @include centerDisplay();
+    flex-direction: column;
+    width: 100%;
+    .title {
+      font-size: 50px;
+      color: #FFFFFF;
+      margin-bottom: 50px;
+    }
+
+    .listName {
+      @include centerDisplay();
+      width: 75%;
+      span {
+        @include centerDisplay();
+        background-color: #FFFFFF;
+        height: 40px;
+        padding-left: 30px;
+      }
+
+      input {
+        padding-left: 30px;
+        width: 100%;
+        height: 40px;
+        color: $myDarkGrey;
+      }
+    }
+
+    //
+
+    .create {
+      height: 100%;
+      button {
+        font-size: 25px;
+        border: none;
+        background-color: $myDarkGrey;
+        color: white;
+        padding: 5px 10px;
+        box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.5);
+        margin-top: 100px;
+        outline: none;
+      }
+      button:active {
+        box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.5) inset;
+      }
+    }
+  }
+}
+
+
+.fa-clipboard-list {
+  padding-right: 15px;
+}

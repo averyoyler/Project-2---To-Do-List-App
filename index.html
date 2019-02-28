@@ -46,6 +46,19 @@
                 <div class="lists"></div>
             </div>
         </div>
+        <div class="bottomNav" id="bottomNavId">
+            <div class="closeButton" onclick="closeBottomNav()">&#215;</div>
+            <div class="bottomNavContent">
+                <div class="title">CREATE A LIST</div>
+                <div class="listName">
+                    <span>&#x270E;</span>
+                    <input id="listNameId" type="text" onkeyup="checkKey(event)">
+                </div>
+                <div class="create">
+                    <button class="button" onclick="addListItem()">CREATE</button>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>
