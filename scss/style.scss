@@ -95,6 +95,31 @@ input {
           left: 30px;
         }
       }
+      .lists {
+        margin: 50px 0 50px;
+        overflow-y: scroll;
+        height: inherit;
+        .rowWrapper {
+          color: #F7F7F7;
+          margin-bottom: 15px;
+          :hover {
+            background-color: $myDarkGrey;
+          }
+          .row {
+            padding: 0 50px;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin: 0;
+            span {
+              outline-color: $myDarkGrey;
+            }
+          }
+          .deleteListButton {
+            padding-left: 50px;
+          }
+        }
+      }
     }
   }
 }
