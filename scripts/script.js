@@ -14,23 +14,38 @@ function closeBottomNav(){
     // document.getElementById('bottomNavId').style.bottom = '-100px';
 }
 
+function checkKey(event){
+    switch(event.which) {
+        case 13:
+            addListItem();
+            $('#listNameId').val('');
+            closeBottomNav();
+    }
+}
+
 function addListItem(){
     let listInputValue = $('#listNameId').val();
     if (listInputValue !== '') {
         $('.lists').append(
             "<div class='rowWrapper'>" +
-            "<div class='row'>" +
-            "<div>" +
-            "<i class=\"fas fa-clipboard-list\"></i>" +
-            "<span contenteditable='true'>" + listInputValue + "</span>" +
-            "</div>" +
-            "<div>" +
-            "<span class='deleteListButton' onclick='deleteList(this)'>&#215;</span>" +
-            "</div>" +
-            "</div>" +
+                "<div class='row'>" +
+                    "<div>" +
+                        "<i class=\"fas fa-clipboard-list\"></i>" +
+                        "<span contenteditable='true'>" + listInputValue + "</span>" +
+                    "</div>" +
+                    "<div>" +
+                        "<span class='deleteListButton' onclick='deleteList(this)'>&#215;</span>" +
+                    "</div>" +
+                "</div>" +
             "</div>"
         );
         $('#listNameId').val('');
         closeBottomNav()
     }
+}
+
+function deleteList(element){
+    $(element).parent().parent().parent().hide('slide', function(){
+        $(element).parent().parent().parent().remove();
+    })
 }
