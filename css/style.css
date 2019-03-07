@@ -88,8 +88,18 @@ input {
             justify-content: space-between;
             width: 100%;
             margin: 0; }
+            .pageWrapper .pageContent .rightOfPage .lists .rowWrapper .row ::placeholder {
+              color: white; }
             .pageWrapper .pageContent .rightOfPage .lists .rowWrapper .row span {
               outline-color: #AFB5BC; }
+            .pageWrapper .pageContent .rightOfPage .lists .rowWrapper .row input {
+              height: 80%; }
+          .pageWrapper .pageContent .rightOfPage .lists .rowWrapper .spacedRow {
+            padding: 0 125px;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin: 0; }
           .pageWrapper .pageContent .rightOfPage .lists .rowWrapper .deleteListButton {
             padding-left: 50px; }
 
