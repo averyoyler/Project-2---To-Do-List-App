@@ -6,6 +6,7 @@ function openBottomNav(){
     // document.getElementById('bottomNavId').style.height = '640px';
     // document.getElementById('bottomNavId').style.bottom = '17%';
     $('#listNameId').focus();
+    $('.listName').css('border', 'none');
 }
 
 function closeBottomNav(){
@@ -45,11 +46,26 @@ function checkKey(event){
 
 function newList(){
     let inputValue = $('#listNameId').val();
+    let doubleInput = false;
     if(inputValue !== '') {
-        listyLists.add(inputValue); // take value of input (list) and send it to ListCollection add method (adds list to list collection)
-        $('#listNameId').val('');
-        saveData();
-        closeBottomNav();
+        for(let i = 0; i < listyLists.collection.length; i++) {
+            if(inputValue === listyLists.collection[i].name) {
+                console.log('double value');
+                doubleInput = true;
+            }
+        }
+        if(doubleInput === false) {
+            listyLists.add(inputValue); // take value of input (list) and send it to ListCollection add method (adds list to list collection)
+            $('#listNameId').val('');
+            saveData();
+            $('.listName').css('border', 'none');
+            closeBottomNav();
+        }
+        else {
+            console.log('can/"t create list');
+            $('.listName').css('border', '2px solid rgba(255, 0, 0, 0.4');
+        }
+        doubleInput = false;
     }
 }
 

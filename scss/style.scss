@@ -179,6 +179,7 @@ input {
     .listName {
       @include centerDisplay();
       width: 75%;
+      height: 80px;
       span {
         @include centerDisplay();
         background-color: #FFFFFF;

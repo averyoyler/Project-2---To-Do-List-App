@@ -148,7 +148,8 @@ input {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 75%; }
+      width: 75%;
+      height: 80px; }
       .bottomNav .bottomNavContent .listName span {
         display: flex;
         justify-content: center;
