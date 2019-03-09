@@ -42,7 +42,7 @@
             <div class="rightOfPage">
                 <nav class= "rightNav">
                     <div class="addListButton">
-                        <img src="images/Avery_PlusIcon.png" alt="Add List" onclick="openBottomNav()" id="addListButtonId">
+                        <img src="images/Avery_PlusIcon.png" alt="Add List" onclick="createList()" id="addListButtonId">
                     </div>
                 </nav>
                 <div class="lists"></div>
@@ -57,7 +57,7 @@
                     <input id="listNameId" type="text" onkeyup="checkKey(event)">
                 </div>
                 <div class="create">
-                    <button class="button" onclick="newList()">CREATE</button>
+                    <button class="button" onclick="bottomNavSubmit(this)">CREATE</button>
                 </div>
             </div>
         </div>
