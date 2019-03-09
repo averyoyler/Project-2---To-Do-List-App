@@ -19,10 +19,9 @@ function closeBottomNav(){
 }
 
 function checkKey(event){
-    switch(event.keyCode){
-        case 13:
-            newList();
-            $('#listNameId').val('');
+    switch(event.key){
+        case 'Enter':
+            bottomNavSubmit();
             break;
     }
 }
@@ -225,7 +224,7 @@ console.log('can/"t create list');
 
 // EDIT
 
-function editListName(element) { // TODO
+function editListName(element) {
     g_currentListName = $(element).parent().parent().parent().get(0).children[0].children[2].innerHTML;
     $('#listNameId').val(g_currentListName);
     $('.listName').css('border', 'none');
@@ -237,6 +236,11 @@ console.log($('.title').html());
 console.log($('.button').html());
     openBottomNav();
 }
+
+function editListItem(element) { // TODO
+
+}
+
 
 // CREATE
 
@@ -252,19 +256,27 @@ console.log($('.button').html());
     openBottomNav();
 }
 
+function createListItem() { // TODO
+
+}
 
 
 // SUBMIT
 
-function bottomNavSubmit(element) {
-    // let buttonText = $(element).parent().parent().get(0).firstChild.children[2].innerHTML;
-    let buttonText = $(element).parent().get(0).children[0].innerHTML;
-    console.log(buttonText);
-    if(buttonText === 'CREATE') {
+function bottomNavSubmit() {
+    let titleName = $('.title').html();
+console.log(titleName);
+    if(titleName === 'CREATE A LIST') {
         newList();
     }
-    else {
+    else if(titleName === 'EDIT LIST') {
         saveListName();
+    }
+    else if(titleName === 'CREATE A TASK') {
+        newTask();
+    }
+    else if(titleName === 'EDIT TASK') {
+        saveTaskName();
     }
 }
 
