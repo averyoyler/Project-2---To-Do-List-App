@@ -128,6 +128,10 @@ input {
             width: 100%;
             margin: 0;
           }
+          .taskRow {
+            display: flex;
+            justify-content: space-between;
+          }
           .deleteListButton {
             padding-left: 50px;
           }

@@ -100,6 +100,9 @@ input {
             flex-direction: column;
             width: 100%;
             margin: 0; }
+          .pageWrapper .pageContent .rightOfPage .lists .rowWrapper .taskRow {
+            display: flex;
+            justify-content: space-between; }
           .pageWrapper .pageContent .rightOfPage .lists .rowWrapper .deleteListButton {
             padding-left: 50px; }
 

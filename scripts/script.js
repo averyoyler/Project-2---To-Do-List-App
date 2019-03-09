@@ -87,7 +87,11 @@ function pagePrint(listyData){
         let listItems = '';
 
         for(let i = 0; i < listyData[l].collection.length; i++){
-            listItems += "<div>" + listyData[l].collection[i].name + "</div>";  // content editable
+            listItems +=
+                "<div class='taskRow'>" +
+                    "<div>" + listyData[l].collection[i].name + "</div>" +
+                    "<div class='deleteListItemButton' onclick='deleteItem(this)'>&#215;</div>" +
+                "</div>";  // content editable
         }
 
         $('.lists').append(
@@ -100,9 +104,7 @@ function pagePrint(listyData){
                     "<div>" +
                         "<input onkeyup='addItem(this, this.value, event, " + l + ")' type='text' placeholder='Add Item...' class='itemInput' style='background-color: #4F6D7A'>" +
                     "</div>" +
-                    "<div>" +
-                        "<span class='deleteListButton' onclick='deleteList(this)'>&#215;</span>" +
-                    "</div>" +
+                    "<div class='deleteListButton' onclick='deleteList(this)'>&#215;</div>" +
                 "</div>" +
                 "<div class='itemBox'>" +
                     "<div class='spacedRow'>" +
@@ -134,10 +136,36 @@ function toggleListDisplay(){
     }
 }
 
+function deleteList(element) {
+    let targetedList = $(element).parent().get(0).firstChild.children[1].innerHTML;
+    console.log(targetedList);
+    console.log(listyLists.collection);
+    for(let l = 0; l < listyLists.collection.length; l++) {
+        if(listyLists.collection[l].name === targetedList) {
+            console.log(listyLists.collection[l].name);
+            listyLists.collection.splice(l,1);
+            saveData();
+            break;
+        }
+    }
+}
 
-
-
-
+function deleteItem(element) {
+    // let targetedItem = $(element).parent().get(0).firstChild.children[1].innerHTML;
+    let targetedItem = $(element).parent().get(0).firstChild.innerHTML;
+    console.log(targetedItem);
+    console.log(listyLists.collection);
+    for(let l = 0; l < listyLists.collection.length; l++) {
+        for(let i = 0; i < listyLists.collection[l].collection.length; i++) {
+            if(listyLists.collection[l].collection[i].name === targetedItem) {
+                console.log("collection task name", listyLists.collection[l].collection.name);
+                listyLists.collection[l].collection.splice(i,1);
+                saveData();
+                break;
+            }
+        }
+    }
+}
 
 
 
