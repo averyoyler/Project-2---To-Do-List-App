@@ -90,22 +90,29 @@ function pagePrint(listyData){
             listItems +=
                 "<div class='taskRow'>" +
                     "<div>" + listyData[l].collection[i].name + "</div>" +
-                    "<div class='deleteListItemButton' onclick='deleteItem(this)'>&#215;</div>" +
+                "<div class='centered'>" +
+                    "<div><i class=\"far fa-edit small\"></i></div>" +
+                    "<div class='deleteListItemButton' onclick='deleteItem(this)'><i class=\"fas fa-trash small\"></i></div>" +
+                "</div>" +
                 "</div>";  // content editable
         }
 
         $('.lists').append(
             "<div class='rowWrapper'>" +
                 "<div class='row' onclick='toggleListDisplay()'>" +
-                    "<div>" +
+                    "<div class='centered'>" +
+                        "<i class=\"fas fa-chevron-circle-down small\"></i>" +
                         "<i class=\"fas fa-clipboard-list\"></i>" +
                         "<span>" + listyData[l].name + "</span>" +
                     "</div>" +
-                    "<div>" +
+            "<div class='centered medium'>" +
+                    "<div class='centered'>" +
                         "<input onkeyup='addItem(this, this.value, event, " + l + ")' type='text' placeholder='Add Item...' class='itemInput' style='background-color: #4F6D7A'>" +
                     "</div>" +
-                    "<div class='deleteListButton' onclick='deleteList(this)'>&#215;</div>" +
+                    "<div><i class=\"far fa-edit\"></i></div>" +
+                    "<div class='deleteListButton' onclick='deleteList(this)'><i class=\"fas fa-trash\"></i></div>" + //$#215 is an x symbol
                 "</div>" +
+            "</div>" +
                 "<div class='itemBox'>" +
                     "<div class='spacedRow'>" +
                             listItems +
@@ -137,12 +144,14 @@ function toggleListDisplay(){
 }
 
 function deleteList(element) {
-    let targetedList = $(element).parent().get(0).firstChild.children[1].innerHTML;
-    console.log(targetedList);
-    console.log(listyLists.collection);
+    console.log(element);
+    // let targetedList = $(element).parent().parent().get(0).firstChild.children[1].innerHTML;
+    let targetedList = $(element).parent().parent().get(0).firstChild.children[2].innerHTML;
+    // console.log(targetedList);
+    // console.log(listyLists.collection);
     for(let l = 0; l < listyLists.collection.length; l++) {
         if(listyLists.collection[l].name === targetedList) {
-            console.log(listyLists.collection[l].name);
+            // console.log(listyLists.collection[l].name);
             listyLists.collection.splice(l,1);
             saveData();
             break;
@@ -151,14 +160,14 @@ function deleteList(element) {
 }
 
 function deleteItem(element) {
-    // let targetedItem = $(element).parent().get(0).firstChild.children[1].innerHTML;
-    let targetedItem = $(element).parent().get(0).firstChild.innerHTML;
-    console.log(targetedItem);
-    console.log(listyLists.collection);
+    // let targetedItem = $(element).parent().parent().get(0).firstChild.innerHTML;
+    let targetedItem = $(element).parent().parent().get(0).firstChild.innerHTML;
+    // console.log(targetedItem);
+    // console.log(listyLists.collection);
     for(let l = 0; l < listyLists.collection.length; l++) {
         for(let i = 0; i < listyLists.collection[l].collection.length; i++) {
             if(listyLists.collection[l].collection[i].name === targetedItem) {
-                console.log("collection task name", listyLists.collection[l].collection.name);
+                // console.log("collection task name", listyLists.collection[l].collection.name);
                 listyLists.collection[l].collection.splice(i,1);
                 saveData();
                 break;

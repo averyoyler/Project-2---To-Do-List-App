@@ -83,7 +83,7 @@ input {
           .pageWrapper .pageContent .rightOfPage .lists .rowWrapper :hover {
             background-color: #AFB5BC; }
           .pageWrapper .pageContent .rightOfPage .lists .rowWrapper .row {
-            padding: 0 50px;
+            padding: 0 50px 0 20px;
             display: flex;
             justify-content: space-between;
             width: 100%;
@@ -93,18 +93,23 @@ input {
             .pageWrapper .pageContent .rightOfPage .lists .rowWrapper .row span {
               outline-color: #AFB5BC; }
             .pageWrapper .pageContent .rightOfPage .lists .rowWrapper .row input {
-              height: 80%; }
-          .pageWrapper .pageContent .rightOfPage .lists .rowWrapper .spacedRow {
-            padding: 0 125px;
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            margin: 0; }
-          .pageWrapper .pageContent .rightOfPage .lists .rowWrapper .taskRow {
-            display: flex;
-            justify-content: space-between; }
-          .pageWrapper .pageContent .rightOfPage .lists .rowWrapper .deleteListButton {
-            padding-left: 50px; }
+              height: 80%;
+              width: 80%;
+              font-size: 15px; }
+        .pageWrapper .pageContent .rightOfPage .lists .spacedRow {
+          padding: 0 125px;
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          margin: 0; }
+        .pageWrapper .pageContent .rightOfPage .lists .taskRow {
+          font-size: 20px;
+          display: flex;
+          justify-content: space-between; }
+          .pageWrapper .pageContent .rightOfPage .lists .taskRow .deleteListItemButton {
+            padding-left: 5px; }
+        .pageWrapper .pageContent .rightOfPage .lists .deleteListButton {
+          padding-left: 5px; }
 
 .bottom {
   display: flex;
@@ -162,7 +167,7 @@ input {
         padding-left: 30px; }
       .bottomNav .bottomNavContent .listName input {
         padding-left: 30px;
-        width: 100%;
+        width: 80%;
         height: 40px;
         color: #AFB5BC; }
     .bottomNav .bottomNavContent .create {
@@ -179,5 +184,20 @@ input {
       .bottomNav .bottomNavContent .create button:active {
         box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.5) inset; }
 
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center; }
+
+.medium {
+  font-size: 20px; }
+
+.small {
+  font-size: 15px; }
+
 .fa-clipboard-list {
   padding-right: 15px; }
+
+.fa-chevron-circle-down {
+  padding-right: 30px; }

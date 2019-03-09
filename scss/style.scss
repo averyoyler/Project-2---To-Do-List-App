@@ -106,7 +106,7 @@ input {
             background-color: $myDarkGrey;
           }
           .row {
-            padding: 0 50px;
+            padding: 0 50px 0 20px;
             display: flex;
             justify-content: space-between;
             width: 100%;
@@ -119,6 +119,9 @@ input {
             }
             input {
               height: 80%;
+              width: 80%;
+              font-size: 15px;
+              }
             }
           }
           .spacedRow {
@@ -129,17 +132,20 @@ input {
             margin: 0;
           }
           .taskRow {
+            font-size: 20px;
             display: flex;
             justify-content: space-between;
+            .deleteListItemButton {
+              padding-left: 5px;
+            }
           }
           .deleteListButton {
-            padding-left: 50px;
+            padding-left: 5px;
           }
         }
       }
     }
   }
-}
 
 .bottom {
   @include centerDisplay();
@@ -193,7 +199,7 @@ input {
 
       input {
         padding-left: 30px;
-        width: 100%;
+        width: 80%;
         height: 40px;
         color: $myDarkGrey;
       }
@@ -220,7 +226,25 @@ input {
   }
 }
 
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.medium {
+  font-size: 20px;
+}
+
+.small {
+  font-size: 15px;
+}
 
 .fa-clipboard-list {
   padding-right: 15px;
+}
+
+.fa-chevron-circle-down {
+  padding-right: 30px;
 }
