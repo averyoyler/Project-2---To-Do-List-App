@@ -37,7 +37,10 @@ function checkKey(event){
             listyLists.add(myData[l].name);
 
             for(let i = 0; i < myData[l].collection.length; i++){
+                console.log(l, i, myData[l].collection[i].name, myData[l].collection[i].completed);
                 listyLists.collection[l].add(myData[l].collection[i].name, myData[l].collection[i].completed);
+                console.log(l, i, listyLists.collection[l].collection[i].name, listyLists.collection[l].collection[i].completed);
+
             }
 
         }
@@ -130,14 +133,34 @@ function pagePrint(listyData){
         let listItems = '';
 
         for(let i = 0; i < listyData[l].collection.length; i++){
-            listItems +=
-                "<div class='taskRow'>" +
+            console.log(l, i, listyData[l].collection[i].name, listyData[l].collection[i].completed);
+            let checkedBoolean = listyData[l].collection[i].completed;
+            if(checkedBoolean) {
+                listItems +=
+                    "<div class='taskRow'>" +
+                    "<div class='centered'>" +
+                    "<input onclick='toggleTaskCompleted(this)' class='taskCheckbox' type='checkbox' checked='checked'>" +
                     "<div>" + listyData[l].collection[i].name + "</div>" +
-                "<div class='centered'>" +
+                    "</div>" +
+                    "<div class='centered'>" +
                     "<div><i class=\"far fa-edit small\" onclick='openEditListItemDialog(this)'></i></div>" +
                     "<div class='deleteListItemButton' onclick='deleteItem(this)'><i class=\"fas fa-trash small\"></i></div>" +
-                "</div>" +
-                "</div>";  // content editable
+                    "</div>" +
+                    "</div>";  // content editable
+            }
+            else {
+                listItems +=
+                    "<div class='taskRow'>" +
+                    "<div class='centered'>" +
+                    "<input onclick='toggleTaskCompleted(this)' class='taskCheckbox' type='checkbox'>" +
+                    "<div>" + listyData[l].collection[i].name + "</div>" +
+                    "</div>" +
+                    "<div class='centered'>" +
+                    "<div><i class=\"far fa-edit small\" onclick='openEditListItemDialog(this)'></i></div>" +
+                    "<div class='deleteListItemButton' onclick='deleteItem(this)'><i class=\"fas fa-trash small\"></i></div>" +
+                    "</div>" +
+                    "</div>";  // content editable
+            }
         }
 
         $('.lists').append(
@@ -205,7 +228,7 @@ function deleteList(element) {
 
 function deleteItem(element) {
     // let targetedItem = $(element).parent().parent().get(0).firstChild.innerHTML;
-    let targetedItem = $(element).parent().parent().get(0).firstChild.innerHTML;
+    let targetedItem = $(element).parent().parent().get(0).firstChild.children[1].innerHTML;
 // console.log(targetedItem);
 // console.log(listyLists.collection);
     for(let l = 0; l < listyLists.collection.length; l++) {
@@ -215,6 +238,19 @@ function deleteItem(element) {
                 listyLists.collection[l].collection.splice(i,1);
                 saveData();
                 break;
+            }
+        }
+    }
+}
+
+function deleteCompletedTasks() {
+// console.log(listyLists.collection);
+    for(let l = 0; l < listyLists.collection.length; l++) {
+        for(let i = 0; i < listyLists.collection[l].collection.length; i++) {
+            if(listyLists.collection[l].collection[i].completed === true) {
+// console.log("collection task name", listyLists.collection[l].collection.name);
+                listyLists.collection[l].collection.splice(i,1);
+                saveData();
             }
         }
     }
@@ -332,7 +368,7 @@ console.log(g_currentListName);
 }
 
 function openEditListItemDialog(element) { // TODO
-    g_currentTaskName = $(element).parent().parent().parent().get(0).children[0].innerHTML;
+    g_currentTaskName = $(element).parent().parent().parent().get(0).children[0].children[1].innerHTML;
     g_currentListName = $(element).parent().parent().parent().parent().parent().parent().get(0).children[0].children[0].children[2].innerHTML;
 console.log(g_currentTaskName);
     $('#listNameId').val(g_currentTaskName);
@@ -393,6 +429,37 @@ console.log(titleName);
     }
 }
 
+// COMPLETED
+
+function toggleTaskCompleted(element){
+    let checkboxInputBoolean = $(element).get(0).checked;
+    let checkedListName = $(element).parent().parent().parent().parent().parent().get(0).children[0].children[0].children[2].innerHTML;
+    let checkedTaskName = $(element).parent().get(0).children[1].innerHTML;
+
+    console.log(checkboxInputBoolean);
+    console.log(checkedListName);
+    console.log(checkedTaskName);
+
+    for(let listIndex = 0; listIndex < listyLists.collection.length; listIndex++) {
+        console.log(listyLists.collection[listIndex].name);
+        if(listyLists.collection[listIndex].name === checkedListName) {
+            console.log('found list');
+            for(let taskIndex = 0; taskIndex < listyLists.collection[listIndex].collection.length; taskIndex++) {
+                if(listyLists.collection[listIndex].collection[taskIndex].name === checkedTaskName) {
+                    console.log('found it');
+                    if(checkboxInputBoolean === true) {
+                        listyLists.collection[listIndex].collection[taskIndex].completed = true;
+                    }
+                    else {
+                        listyLists.collection[listIndex].collection[taskIndex].completed = false;
+                    }
+                    saveData();
+                    break;
+                }
+            }
+        }
+    }
+}
 
 
 

@@ -252,3 +252,20 @@ input {
 .fa-plus {
   padding-right: 5px;
 }
+
+
+
+
+.taskCheckbox {
+  margin-right: 5px;
+}
+
+.deleteAll {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  padding-right: 15px;
+  color: #FFFFFF;
+}

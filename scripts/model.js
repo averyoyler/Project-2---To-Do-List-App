@@ -17,5 +17,5 @@ function List(name){
 
 function Task(name, completed){
     this.name = name;
-    this.completed = false;
+    this.completed = completed;
 }
