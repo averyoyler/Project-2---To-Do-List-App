@@ -143,8 +143,8 @@ function pagePrint(listyData){
                     "<div>" + listyData[l].collection[i].name + "</div>" +
                     "</div>" +
                     "<div class='centered'>" +
-                    "<div><i class=\"far fa-edit small\" onclick='openEditListItemDialog(this)'></i></div>" +
-                    "<div class='deleteListItemButton' onclick='deleteItem(this)'><i class=\"fas fa-trash small\"></i></div>" +
+                    "<div><i title='Edit Task' class=\"far fa-edit small\" onclick='openEditListItemDialog(this)'></i></div>" +
+                    "<div class='deleteListItemButton' onclick='deleteItem(this)'><i title='Delete Task' class=\"fas fa-trash small\"></i></div>" +
                     "</div>" +
                     "</div>";  // content editable
             }
@@ -156,8 +156,8 @@ function pagePrint(listyData){
                     "<div>" + listyData[l].collection[i].name + "</div>" +
                     "</div>" +
                     "<div class='centered'>" +
-                    "<div><i class=\"far fa-edit small\" onclick='openEditListItemDialog(this)'></i></div>" +
-                    "<div class='deleteListItemButton' onclick='deleteItem(this)'><i class=\"fas fa-trash small\"></i></div>" +
+                    "<div><i title='Edit Task' class=\"far fa-edit small\" onclick='openEditListItemDialog(this)'></i></div>" +
+                    "<div class='deleteListItemButton' onclick='deleteItem(this)'><i title='Delete Task' class=\"fas fa-trash small\"></i></div>" +
                     "</div>" +
                     "</div>";  // content editable
             }
@@ -167,15 +167,15 @@ function pagePrint(listyData){
             "<div class='rowWrapper'>" +
                 "<div class='row'>" +
                     "<div class='centered'>" +
-                        "<i class=\"fas fa-chevron-circle-down small\" onclick='toggleListDisplay()'></i>" +
+                        "<i title='Show/Hide Tasks' class=\"fas fa-chevron-circle-down small\" onclick='toggleListDisplay()'></i>" +
                         "<i class=\"fas fa-clipboard-list\"></i>" +
                         "<span>" + listyData[l].name + "</span>" +
                     "</div>" +
             "<div class='centered medium'>" +
                         // "<input onkeyup='addItem(this, this.value, event, " + l + ")' type='text' placeholder='Add Item...' class='itemInput' style='background-color: #4F6D7A'>" +
-                    "<div><i class=\"fas fa-plus\" onclick='openCreateListItemDialog(this)'></i></div>" +
-                    "<div><i class=\"far fa-edit\" onclick='editListName(this)'></i></div>" +
-                    "<div class='deleteListButton' onclick='deleteList(this)'><i class=\"fas fa-trash\"></i></div>" + //$#215 is an x symbol
+                    "<div><i title='New Task' class=\"fas fa-plus\" onclick='openCreateListItemDialog(this)'></i></div>" +
+                    "<div><i title='Edit List' class=\"far fa-edit\" onclick='editListName(this)'></i></div>" +
+                    "<div class='deleteListButton' onclick='deleteList(this)'><i title='Delete List' class=\"fas fa-trash\"></i></div>" +
                 "</div>" +
             "</div>" +
                 "<div class='itemBox'>" +
