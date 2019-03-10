@@ -1,5 +1,7 @@
 let g_showDisplay = true;
 let g_currentListName;
+let g_listToWhichTaskBelongs;
+let g_currentTaskName;
 
 function openBottomNav(){
     $('#bottomNavId').css('height', '681px');
@@ -43,6 +45,7 @@ function checkKey(event){
     }
 })();
 
+// NEW
 
 function newList(){
     let inputValue = $('#listNameId').val();
@@ -52,12 +55,12 @@ function newList(){
             if(inputValue === listyLists.collection[i].name) {
                 console.log('double value');
                 doubleInput = true;
+                break;
             }
         }
         if(doubleInput === false) {
             listyLists.add(inputValue); // take value of input (list) and send it to ListCollection add method (adds list to list collection)
             saveData();
-            $('.listName').css('border', 'none');
             closeBottomNav();
         }
         else {
@@ -65,7 +68,49 @@ function newList(){
             $('.listName').css('border', '2px solid rgba(255, 0, 0, 0.4');
         }
     }
+    else{
+        $('.listName').css('border', '2px solid rgba(255, 0, 0, 0.4');
+    }
 }
+
+function newTask() {
+    let editListIndex = 0;
+    let inputValue = $('#listNameId').val();
+
+
+    for(editListIndex = 0; editListIndex < listyLists.collection.length; editListIndex++) {
+        if(listyLists.collection[editListIndex].name === g_listToWhichTaskBelongs) {
+            // found editListIndex index
+            console.log(listyLists.collection[editListIndex].name);
+            break;
+        }
+    }
+
+    let doubleInput = false;
+    if(inputValue !== '') {
+        for(let i = 0; i < listyLists.collection[editListIndex].collection.length; i++) {
+            if(inputValue === listyLists.collection[editListIndex].collection[i].name) {
+                console.log('double value');
+                doubleInput = true;
+                break;
+            }
+        }
+        if(doubleInput === false) {
+            listyLists.collection[editListIndex].add(inputValue);
+            saveData();
+            closeBottomNav();
+        }
+        else {
+            console.log('can/"t create list');
+            $('.listName').css('border', '2px solid rgba(255, 0, 0, 0.4');
+        }
+    }
+    else{
+        $('.listName').css('border', '2px solid rgba(255, 0, 0, 0.4');
+    }
+}
+
+// SAVE AND RETRIEVE (LOCAL STORAGE)
 
 function saveData(){
     localStorage.setItem('listy', JSON.stringify(listyLists.collection));
@@ -89,7 +134,7 @@ function pagePrint(listyData){
                 "<div class='taskRow'>" +
                     "<div>" + listyData[l].collection[i].name + "</div>" +
                 "<div class='centered'>" +
-                    "<div><i class=\"far fa-edit small\"></i></div>" +
+                    "<div><i class=\"far fa-edit small\" onclick='openEditListItemDialog(this)'></i></div>" +
                     "<div class='deleteListItemButton' onclick='deleteItem(this)'><i class=\"fas fa-trash small\"></i></div>" +
                 "</div>" +
                 "</div>";  // content editable
@@ -104,9 +149,8 @@ function pagePrint(listyData){
                         "<span>" + listyData[l].name + "</span>" +
                     "</div>" +
             "<div class='centered medium'>" +
-                    "<div class='centered'>" +
-                        "<input onkeyup='addItem(this, this.value, event, " + l + ")' type='text' placeholder='Add Item...' class='itemInput' style='background-color: #4F6D7A'>" +
-                    "</div>" +
+                        // "<input onkeyup='addItem(this, this.value, event, " + l + ")' type='text' placeholder='Add Item...' class='itemInput' style='background-color: #4F6D7A'>" +
+                    "<div><i class=\"fas fa-plus\" onclick='openCreateListItemDialog(this)'></i></div>" +
                     "<div><i class=\"far fa-edit\" onclick='editListName(this)'></i></div>" +
                     "<div class='deleteListButton' onclick='deleteList(this)'><i class=\"fas fa-trash\"></i></div>" + //$#215 is an x symbol
                 "</div>" +
@@ -120,7 +164,7 @@ function pagePrint(listyData){
     }
 }
 
-function addItem(element, incVal, event, listNumber){
+function addItem(element, incVal, event, listNumber){ // TODO CHANGE
     switch(event.key){
         case "Enter":
             $(element).val('');
@@ -178,8 +222,8 @@ function deleteItem(element) {
 
 // SAVE
 
-function saveListName(element) { // TODO
-    // get new/edited list name
+function saveListName() { // TODO
+    // get edited list name
     let inputValue = $('#listNameId').val();
     let editListIndex = 0;
     let doubleInput = false;
@@ -222,23 +266,81 @@ console.log('can/"t create list');
     }
 }
 
+function saveTaskName() {
+    let inputValue = $('#listNameId').val();
+    let editTaskIndex = 0;
+    let editListIndex = 0;
+    let doubleInput = false;
+
+
+    // get index for the list being edited
+    console.log('list    ' + g_currentListName);
+    console.log('task    ' + g_currentTaskName);
+
+    for(editListIndex = 0; editListIndex < listyLists.collection.length; editListIndex++) {
+        for(editTaskIndex = 0; editTaskIndex < listyLists.collection[editListIndex].collection.length; editTaskIndex++) {
+            if(listyLists.collection[editListIndex].collection[editTaskIndex].name === g_currentTaskName) {
+                console.log(editListIndex, editTaskIndex);
+                break;
+            }
+        }
+        if(editTaskIndex < listyLists.collection[editListIndex].collection.length) {
+            break;
+        }
+    }
+
+
+    // check for and ignore empty task name //TODO error ?
+    if(inputValue !== '') {
+        // check for duplicate task names
+        for(let i = 0; i < listyLists.collection[editListIndex].collection.length; i++) {
+            if(i === editTaskIndex) {
+                break;
+            }
+            if(inputValue === listyLists.collection[editListIndex].collection[i].name) {
+                console.log('double value');
+                doubleInput = true;
+                break;
+            }
+        }
+
+        if(doubleInput === false) {
+            // not a duplicate - edit task
+            listyLists.collection[editListIndex].collection[editTaskIndex].name = inputValue;
+            saveData();
+            closeBottomNav();
+        }
+        else {
+            // disallow duplicates
+            console.log('can/"t create list');
+            $('.listName').css('border', '2px solid rgba(255, 0, 0, 0.4'); //TODO FIX BORDER
+        }
+    }
+}
+
 // EDIT
 
-function editListName(element) {
+function editListName(element) { // edit bottom nav content title
     g_currentListName = $(element).parent().parent().parent().get(0).children[0].children[2].innerHTML;
     $('#listNameId').val(g_currentListName);
     $('.listName').css('border', 'none');
 
-    console.log(g_currentListName);
+console.log(g_currentListName);
     $('.title').html('EDIT LIST');
-console.log($('.title').html());
     $('.button').html('SAVE');
-console.log($('.button').html());
     openBottomNav();
 }
 
-function editListItem(element) { // TODO
+function openEditListItemDialog(element) { // TODO
+    g_currentTaskName = $(element).parent().parent().parent().get(0).children[0].innerHTML;
+    g_currentListName = $(element).parent().parent().parent().parent().parent().parent().get(0).children[0].children[0].children[2].innerHTML;
+console.log(g_currentTaskName);
+    $('#listNameId').val(g_currentTaskName);
+    $('.listName').css('border', 'none');
 
+    $('.title').html('EDIT TASK');
+    $('.button').html('SAVE');
+    openBottomNav();
 }
 
 
@@ -256,8 +358,19 @@ console.log($('.button').html());
     openBottomNav();
 }
 
-function createListItem() { // TODO
+function openCreateListItemDialog(element) { // TODO
+    g_listToWhichTaskBelongs = $(element).parent().parent().parent().get(0).children[0].children[2].innerHTML;
+// console.log(g_listToWhichTaskBelongs);
 
+    $('#listNameId').val('');
+    $('.listName').css('border', 'none');
+
+    $('.title').html('CREATE A TASK');
+    console.log($('.title').html());
+
+    $('.button').html('CREATE');
+    console.log($('.button').html());
+    openBottomNav();
 }
 
 
