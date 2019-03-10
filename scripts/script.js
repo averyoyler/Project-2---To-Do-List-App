@@ -258,7 +258,7 @@ function deleteCompletedTasks() {
 
 // SAVE
 
-function saveListName() { // TODO
+function saveListName() {
     // get edited list name
     let inputValue = $('#listNameId').val();
     let editListIndex = 0;
@@ -274,12 +274,12 @@ console.log(listyLists.collection[editListIndex].name);
         }
     }
 
-    // check for and ignore empty list name //TODO error ?
+    // check for and ignore empty list name
     if(inputValue !== '') {
         // check for duplicate list names
         for(let i = 0; i < listyLists.collection.length; i++) {
             if(i === editListIndex) {
-                break;
+                continue;
             }
             if(inputValue === listyLists.collection[i].name) {
 console.log('double value');
@@ -297,8 +297,11 @@ console.log('double value');
         else {
             // disallow duplicates
 console.log('can/"t create list');
-            $('.listName').css('border', '2px solid rgba(255, 0, 0, 0.4'); //TODO FIX BORDER
+            $('.listName').css('border', '2px solid rgba(255, 0, 0, 0.4');
         }
+    }
+    else {
+        $('.listName').css('border', '2px solid rgba(255, 0, 0, 0.4');
     }
 }
 
@@ -326,12 +329,12 @@ function saveTaskName() {
     }
 
 
-    // check for and ignore empty task name //TODO error ?
+    // check for and ignore empty task name
     if(inputValue !== '') {
         // check for duplicate task names
         for(let i = 0; i < listyLists.collection[editListIndex].collection.length; i++) {
             if(i === editTaskIndex) {
-                break;
+                continue;
             }
             if(inputValue === listyLists.collection[editListIndex].collection[i].name) {
                 console.log('double value');
@@ -349,8 +352,11 @@ function saveTaskName() {
         else {
             // disallow duplicates
             console.log('can/"t create list');
-            $('.listName').css('border', '2px solid rgba(255, 0, 0, 0.4'); //TODO FIX BORDER
+            $('.listName').css('border', '2px solid rgba(255, 0, 0, 0.4');
         }
+    }
+    else {
+        $('.listName').css('border', '2px solid rgba(255, 0, 0, 0.4');
     }
 }
 
@@ -367,7 +373,7 @@ console.log(g_currentListName);
     openBottomNav();
 }
 
-function openEditListItemDialog(element) { // TODO
+function openEditListItemDialog(element) {
     g_currentTaskName = $(element).parent().parent().parent().get(0).children[0].children[1].innerHTML;
     g_currentListName = $(element).parent().parent().parent().parent().parent().parent().get(0).children[0].children[0].children[2].innerHTML;
 console.log(g_currentTaskName);
@@ -394,7 +400,7 @@ console.log($('.button').html());
     openBottomNav();
 }
 
-function openCreateListItemDialog(element) { // TODO
+function openCreateListItemDialog(element) {
     g_listToWhichTaskBelongs = $(element).parent().parent().parent().get(0).children[0].children[2].innerHTML;
 // console.log(g_listToWhichTaskBelongs);
 
