@@ -165,9 +165,9 @@ function pagePrint(listyData){
 
         $('.lists').append(
             "<div class='rowWrapper'>" +
-                "<div class='row' onclick='toggleListDisplay()'>" +
+                "<div class='row'>" +
                     "<div class='centered'>" +
-                        "<i class=\"fas fa-chevron-circle-down small\"></i>" +
+                        "<i class=\"fas fa-chevron-circle-down small\" onclick='toggleListDisplay()'></i>" +
                         "<i class=\"fas fa-clipboard-list\"></i>" +
                         "<span>" + listyData[l].name + "</span>" +
                     "</div>" +
@@ -460,121 +460,3 @@ function toggleTaskCompleted(element){
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-// CONTENT EDITABLE
-
-/*
-
-    What I Need:
-        - Value of the task name
-        - Which list [l]
-        - Which item [i]
-
- */
-
-// DELETE LIST
-
-/*
-
-    What I Need:
-        - Index of list
-        - Value of list
-
- */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-
-$('.lists').append("<div><span>" + listyData[l].name + "</span>" +
-            "<input onkeyup='addItem(this, this.value, event, " + l + ")' type='text' placeholder='Add Item...' class='itemInput'>" +
-            "<div class='itemBox'>" + listItems + "</div>" +
-            "</div>");
-
-
-
-
-
-
-function checkKey(event){
-    switch(event.which) {
-        case 13:
-            addListItem();
-            $('#listNameId').val('');
-            closeBottomNav();
-    }
-}
-
-
-function addListItem(){
-    let listInputValue = $('#listNameId').val();
-    if (listInputValue !== '') {
-        let id = `${Date.now()}`;
-        $('.lists').append(
-            "<div id=" + id + " class='rowWrapper'>" +
-                "<div class='row'>" +
-                    "<div>" +
-                        "<i class=\"fas fa-clipboard-list\"></i>" +
-                        "<span contenteditable='true'>" + listInputValue + "</span>" +
-                    "</div>" +
-                    "<div>" +
-                        "<span class='deleteListButton' onclick='deleteList(this)'>&#215;</span>" +
-                    "</div>" +
-                "</div>" +
-            "</div>"
-        );
-        $('#listNameId').val('');
-        saveList(id, listInputValue); // new
-        closeBottomNav();
-    }
-}
-
-function deleteList(element){
-    $(element).parent().parent().parent().hide('slide', function(){
-        $(element).parent().parent().parent().remove();
-    })
-}
-
-
-// new
-
-function saveList(listId, listName) {
-    const stringifiedList = JSON.stringify(listName);
-    localStorage.setItem(listId, stringifiedList);
-}
-
-function retrieveLocalStorageList(listId) {
-    return JSON.parse(localStorage.getItem(listId));
-}
-
-
-*/
