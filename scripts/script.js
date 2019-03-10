@@ -247,7 +247,8 @@ function deleteCompletedTasks() {
 // console.log(listyLists.collection);
     for(let l = 0; l < listyLists.collection.length; l++) {
         for(let i = 0; i < listyLists.collection[l].collection.length; i++) {
-            if(listyLists.collection[l].collection[i].completed === true) {
+            while(i < listyLists.collection[l].collection.length &&
+                    listyLists.collection[l].collection[i].completed === true) {
 // console.log("collection task name", listyLists.collection[l].collection.name);
                 listyLists.collection[l].collection.splice(i,1);
                 saveData();
